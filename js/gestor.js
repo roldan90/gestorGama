@@ -123,6 +123,7 @@ function editarArchivo(idArchivo) {
 		data:"idArchivo=" + idArchivo,
 		url:"../procesos/gestor/editarArchivo.php",
 		success:function(respuesta) {
+			console.log(respuesta);
 			respuesta = jQuery.parseJSON(respuesta);
 			
 			$('#no_oficiou').val(respuesta['no_oficio']);
@@ -130,8 +131,10 @@ function editarArchivo(idArchivo) {
 			$('#asuntou').val(respuesta['asunto']);
 			$('#fecha_oficiou').val(respuesta['fecha_oficio']);
 			$('#descripcionu').val(respuesta['descripcion']);
-
+			$('#status_oficiou').val(respuesta['status_oficio']);
 			$('#categoriasLoadu').load("categorias/selectCategoriasUpdate.php?idCategoria=" + respuesta['id_categoria']);
+			$('#remitenteIdUpdate').load("gestor/selectRemitenteUpdate.php?id=" + respuesta['remitente_oficio']);
+			$('#destinatarioIdUpdate').load("gestor/selectDestinatarioUpdate.php?id=" + respuesta['destinatario_oficio']);
 		}
 	});
 }
