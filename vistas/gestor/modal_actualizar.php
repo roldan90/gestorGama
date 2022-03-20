@@ -15,11 +15,12 @@
             <div class="modal-body">
         
                 <h3 class="section-title text-center wow fadeInDown"><span class="fa fa-file-signature"></span>
-                    <b>Registro de Archivos</b></h3>
-                <p class="text-center wow fadeInDown">Ingresa los datos solicitados en el formulario.</p>
+                    <b>Actualizar información de Archivos</b></h3>
+                <p class="text-center wow fadeInDown">Edita los datos solicitados en el formulario.</p>
 
 
-                <form id="frmArchivosu" enctype="multipart/form-data">
+                <form id="frmArchivosu" enctype="multipart/form-data" method="POST">
+                        <input type="text" name="idArchivou" id="idArchivou" hidden>
                         <div class="row">
                             <div class="col">
                                 <label for="no_oficiou"><b>No. Oficio:</b></label>
@@ -55,7 +56,7 @@
                                 <div id="remitenteIdUpdate"></div>
                             
                                 <div id="destinatarioIdUpdate"></div>
-                                
+
                                 <label for="status_oficio"><b>Status Oficio:</b></label>
                                 <select class="form-control" type="text" id="status_oficiou" name="status_oficiou" placeholder="Status" required >
                                     <option selected value="No Especificado">Elige Status </option>
@@ -65,13 +66,11 @@
                             </div>
                         </div>
                 </form>
-            
-
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning" id="btnActualiza">Actualizar</button>
-                <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+                <button  class="btn btn-warning" id="btnActualiza" onclick="actualizarGestor()">Actualizar</button>
+                <button  class="btn btn-dark" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
       

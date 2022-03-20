@@ -38,6 +38,40 @@
 			return $respuesta;
 		}
 
+		public function actualizarArchivo($data) {
+			$conexion = Conectar::conexion();
+
+			try {
+				$sql = "UPDATE t_archivos SET id_usuario = ?,
+											id_categoria = ?,
+											no_oficio = ?,
+											descripcion = ?,
+											asunto = ?,
+											fecha_oficio = ?,
+											fecha_oficiolimit = ?,
+											id_remitente = ?,
+											id_destinatario = ?,
+											status_oficio = ?
+					WHERE id_archivo = ?";
+				$query = $conexion->prepare($sql);
+				$query->bind_param('iisssssiisi', $data['id_usuario'], 
+													$data['categoriasArchivosu'],
+													$data['no_oficiou'],
+													$data['descripcionu'],
+													$data['asuntou'],
+													$data['fecha_oficiou'],
+													$data['fecha_oficiolimitu'],
+													$data['remitente_oficiou'],
+													$data['destinatario_oficio'],
+													$data['status_oficiou'],
+													$data['id_archivo']);
+				$respuesta = $query->execute();
+				$query->close();
+				return $respuesta;
+			} catch (\Throwable $th) {
+				return $th->getMessage();
+			}
+		}
 		
 		public static function oficioRepetido($no_oficio) {
 			$conexion = Conectar::conexion();

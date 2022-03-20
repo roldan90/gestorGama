@@ -45,18 +45,22 @@
                                     required=""></textarea>
                             </div>
                             <div class="col">
-                            <label><b>Fecha Limite Oficio:</b></label>
-                            <input type="date" name="fecha_oficiolimit" id="fecha_oficiolimit" class="form-control"
+                                <label><b>Fecha Limite Oficio:</b></label>
+                                <input type="date" name="fecha_oficiolimit" id="fecha_oficiolimit" class="form-control"
                                 value="<?php echo date("Y-m-d"); ?>" required="">
+
                                 <div id="controlRemitente"></div>
+
                                 <div id="controlDestinatario"></div>
+
                                 <label><b>Selecciona archivos:</b></label>
                                 <input type="file" name="archivos[]" id="archivos" class="form-control" multiple="multiple">
+                                
                                 <label for="status_oficio"><b>Status Oficio:</b></label>
                                 <select class="form-control" type="text" id="status_oficio" name="status_oficio" placeholder="Status" required >
-                                <option selected value="No Especificado">Elige Status </option>
-                                <option value="VIGENTE">VIGENTE</option>
-                                <option value="CANCELADO">CANCELADO</option>
+                                    <option selected value="No Especificado">Elige Status </option>
+                                    <option value="VIGENTE">VIGENTE</option>
+                                    <option value="CANCELADO">CANCELADO</option>
                                 </select>  
                             </div>
                         </div>

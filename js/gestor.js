@@ -83,7 +83,7 @@ function eliminarArchivo(idArchivo) {
 	    		data:"idArchivo=" + idArchivo,
 	    		url:"../procesos/gestor/eliminaArchivo.php",
 	    		success:function(respuesta){
-	    			console.log(respuesta);
+	    			
 	    			respuesta = respuesta.trim();
 	    			if (respuesta == 1) {
 
@@ -123,7 +123,7 @@ function editarArchivo(idArchivo) {
 		data:"idArchivo=" + idArchivo,
 		url:"../procesos/gestor/editarArchivo.php",
 		success:function(respuesta) {
-			console.log(respuesta);
+			
 			respuesta = jQuery.parseJSON(respuesta);
 			
 			$('#no_oficiou').val(respuesta['no_oficio']);
@@ -132,9 +132,60 @@ function editarArchivo(idArchivo) {
 			$('#fecha_oficiou').val(respuesta['fecha_oficio']);
 			$('#descripcionu').val(respuesta['descripcion']);
 			$('#status_oficiou').val(respuesta['status_oficio']);
+			$('#idArchivou').val(respuesta['id_archivo']);
 			$('#categoriasLoadu').load("categorias/selectCategoriasUpdate.php?idCategoria=" + respuesta['id_categoria']);
 			$('#remitenteIdUpdate').load("gestor/selectRemitenteUpdate.php?id=" + respuesta['remitente_oficio']);
 			$('#destinatarioIdUpdate').load("gestor/selectDestinatarioUpdate.php?id=" + respuesta['destinatario_oficio']);
 		}
 	});
+}
+
+function actualizarGestor() {
+
+	if ($('#categoriasArchivosu').val() == "") {
+		swal("Elige una categoria!", "", "error");
+		return false;
+	} else if ($('#no_oficiou').val() == "") {
+		swal("Espeficifica un No. de Oficio!", "", "error");
+		return false;
+	} else if ($('#asuntou').val() == "") {
+		swal("Especifica Asunto del Oficio!", "", "error");
+		return false;
+	} else if ($('#descripcionu').val() == "") {
+		swal("Escribe la descripcion del Oficio!", "", "error");
+		return false;
+	} else if ($('#fecha_oficiou').val() == "") {
+		swal("Especifica la fecha del Oficio!", "", "error");
+	} else if ($('#remitente_oficiou').val() == "") {
+		swal("Especifica el remitente del Oficio!", "", "error");
+		return false;
+	} else if ($('#destinatario_oficiou').val() == "") {
+		swal("Especifica el destinatario del Oficio!", "", "error");
+		return false;
+	} else if ($('#status_oficiou').val() == "") {
+		swal("Especifica el status del Oficio!", "", "error");
+		return false;
+	} 
+
+	$.ajax({
+		type:"POST",
+		data:$('#frmArchivosu').serialize(),
+		url:"../procesos/gestor/actualizarArchivos.php",
+		success:function(respuesta) {
+			respuesta = respuesta.trim();
+			if (respuesta == 1) {
+
+				$('#tablaGestorArchivos').load("gestor/tablaGestor.php");
+				swal("Actualizado con exito!", {
+					icon: "success",
+				});
+			} else {
+				swal("Error al actualizar!" + respuesta, {
+					icon: "error",
+				});
+			}
+		}
+	});
+
+	return false;
 }
