@@ -62,7 +62,9 @@
                                     <option selected value="No Especificado">Elige Status </option>
                                     <option value="VIGENTE">VIGENTE</option>
                                     <option value="CANCELADO">CANCELADO</option>
-                                </select>  
+                                </select>
+                                <label for="archivou">Selecciona un archivo (opcional)</label>
+                                <input type="file" name="archivou" id="archivou" class="form-control" >  
                             </div>
                         </div>
                 </form>

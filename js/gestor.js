@@ -11,62 +11,7 @@ $(document).ready(function() {
 
 });
 
-function agregarArchivosGestor() {
-	var formData = new FormData(document.getElementById('frmArchivos'));
 
-	if ($('#categoriasArchivos').val() == "") {
-		swal("Elige una categoria!", "", "error");
-		return false;
-	} else if ($('#no_oficio').val() == "") {
-		swal("Espeficifica un No. de Oficio!", "", "error");
-		return false;
-	} else if ($('#asunto').val() == "") {
-		swal("Especifica Asunto del Oficio!", "", "error");
-		return false;
-	} else if ($('#descripcion').val() == "") {
-		swal("Escribe la descripcion del Oficio!", "", "error");
-		return false;
-	} else if ($('#fecha_oficio').val() == "") {
-		swal("Especifica la fecha del Oficio!", "", "error");
-	} else if ($('#remitente_oficio').val() == "") {
-		swal("Especifica el remitente del Oficio!", "", "error");
-		return false;
-	} else if ($('#destinatario_oficio').val() == "") {
-		swal("Especifica el destinatario del Oficio!", "", "error");
-		return false;
-	} else if ($('#status_oficio').val() == "") {
-		swal("Especifica el status del Oficio!", "", "error");
-		return false;
-	} else if ($('#archivos').val() == "") {
-		swal("Selecciona un Archivo!", "", "error");
-		return false;
-	}
-
-	
-	$.ajax({
-		url:"../procesos/gestor/guardarArchivos.php",
-		type:"POST",
-		datatype: "html",
-		data: formData,
-		cache:false,
-		contentType:false,
-		processData:false,
-		success:function(respuesta){
-			console.log(respuesta);
-			respuesta = respuesta.trim();
-
-			if (respuesta == 1) {
-				$('#frmArchivos')[0].reset();
-				$('#tablaGestorArchivos').load("gestor/tablaGestor.php");
-				swal("Excelente!", "Archivo agregado correctamente!", "success");
-			} else if (respuesta == 'oficio') {
-                swal("No. de Oficio ya existe!", "por favor registra uno diferente!", "error");
-			} else {
-				swal("Ocurrió un error!", "Verifica los datos del registro!", "error");
-			}
-		}
-	});
-} 
 
 function eliminarArchivo(idArchivo) {
 	swal({
@@ -140,8 +85,65 @@ function editarArchivo(idArchivo) {
 	});
 }
 
-function actualizarGestor() {
+function agregarArchivosGestor() {
+	var formData = new FormData(document.getElementById('frmArchivos'));
 
+	if ($('#categoriasArchivos').val() == "") {
+		swal("Elige una categoria!", "", "error");
+		return false;
+	} else if ($('#no_oficio').val() == "") {
+		swal("Espeficifica un No. de Oficio!", "", "error");
+		return false;
+	} else if ($('#asunto').val() == "") {
+		swal("Especifica Asunto del Oficio!", "", "error");
+		return false;
+	} else if ($('#descripcion').val() == "") {
+		swal("Escribe la descripcion del Oficio!", "", "error");
+		return false;
+	} else if ($('#fecha_oficio').val() == "") {
+		swal("Especifica la fecha del Oficio!", "", "error");
+	} else if ($('#remitente_oficio').val() == "") {
+		swal("Especifica el remitente del Oficio!", "", "error");
+		return false;
+	} else if ($('#destinatario_oficio').val() == "") {
+		swal("Especifica el destinatario del Oficio!", "", "error");
+		return false;
+	} else if ($('#status_oficio').val() == "") {
+		swal("Especifica el status del Oficio!", "", "error");
+		return false;
+	} else if ($('#archivos').val() == "") {
+		swal("Selecciona un Archivo!", "", "error");
+		return false;
+	}
+
+	
+	$.ajax({
+		url:"../procesos/gestor/guardarArchivos.php",
+		type:"POST",
+		datatype: "html",
+		data: formData,
+		cache:false,
+		contentType:false,
+		processData:false,
+		success:function(respuesta){
+			console.log(respuesta);
+			respuesta = respuesta.trim();
+
+			if (respuesta == 1) {
+				$('#frmArchivos')[0].reset();
+				$('#tablaGestorArchivos').load("gestor/tablaGestor.php");
+				swal("Excelente!", "Archivo agregado correctamente!", "success");
+			} else if (respuesta == 'oficio') {
+                swal("No. de Oficio ya existe!", "por favor registra uno diferente!", "error");
+			} else {
+				swal("Ocurrió un error!", "Verifica los datos del registro!", "error");
+			}
+		}
+	});
+} 
+
+function actualizarGestor() {
+	let formDatau = new FormData(document.getElementById('frmArchivosu'));
 	if ($('#categoriasArchivosu').val() == "") {
 		swal("Elige una categoria!", "", "error");
 		return false;
@@ -167,9 +169,14 @@ function actualizarGestor() {
 		return false;
 	} 
 
+
 	$.ajax({
 		type:"POST",
-		data:$('#frmArchivosu').serialize(),
+		datatype: "html",
+		data: formDatau,
+		cache:false,
+		contentType:false,
+		processData:false,
 		url:"../procesos/gestor/actualizarArchivos.php",
 		success:function(respuesta) {
 			respuesta = respuesta.trim();
