@@ -283,13 +283,19 @@
 		public function obtenerArchivo($idArchivo) {
 			$conexion = Conectar::conexion();
 
-			$sql = "SELECT nombre 
+			$sql = "SELECT id_usuario, id_archivo, nombre 
 					FROM t_archivos 
 					WHERE id_archivo = '$idArchivo'";
 			$result = mysqli_query($conexion, $sql);
 			$respuesta = mysqli_fetch_array($result);
 
-			return $respuesta['nombre'];
+			$datos = array(
+							"id_usuario" => $respuesta['id_usuario'], 
+							"id_archivo" => $respuesta['id_archivo'],
+							"nombre" => $respuesta['nombre']
+						);
+
+			return $datos;
 		}
 
 		public function actualizarSeccionArchivo($datos) {
@@ -300,7 +306,7 @@
 						ruta = ? 
 					WHERE id_archivo = ? ";
 			$query = $conexion->prepare($sql);
-			$query->bind_param('sssi', $datos['nombre'], 
+			$query->bind_param('sssi', $datos['nombreArchivo'], 
 										$datos['tipo'], 
 										$datos['ruta'], 
 										$datos['id_archivo']);

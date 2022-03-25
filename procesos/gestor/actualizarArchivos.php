@@ -19,18 +19,19 @@
     $respuesta = $Gestor->actualizarArchivo($data);
 
     if($_FILES['archivou']['name'] != "" && $respuesta) {
-        $nombreArchivoAnterior = "../../archivos/20/" . $Gestor->obtenerArchivo($idArchivo);
+        $datosArchivo = $Gestor->obtenerArchivo($data['id_archivo']);
+        $nombreArchivoAnterior = "../../archivos/" . $datosArchivo['id_usuario'] . "/" . $datosArchivo['nombre']; 
 
         if(unlink($nombreArchivoAnterior)) {
-            $rutaGuardado = $_FILES['archivou']['tmp'];
-            $nuevoArchivo = "../../archivos/20/" . $_FILES['archivou']['name'];
+            $rutaGuardado = $_FILES['archivou']['tmp_name'];
+            $nuevoArchivo = "../../archivos/" . $datosArchivo['id_usuario'] . "/" . $_FILES['archivou']['name'];
             if (move_uploaded_file($rutaGuardado, $nuevoArchivo)) {
 
-                $nombreArchivo = $_FILES['archivos']['name'][$i];
+                $nombreArchivo = $_FILES['archivou']['name'];
 				$explode = explode('.', $nombreArchivo);
 				$tipoArchivo = array_pop($explode);
-				$rutaAlmacenamiento = $_FILES['archivos']['tmp_name'][$i];
-				$rutaFinal = $carpetaUsuario . "/" . $nombreArchivo;
+				$rutaAlmacenamiento = $_FILES['archivou']['tmp_name'];
+				$rutaFinal = "../../archivos/" . $datosArchivo['id_usuario'] . "/" . $nombreArchivo;
 
                 $datos = array(
                     "nombreArchivo" => $nombreArchivo,
